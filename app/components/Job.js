@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 function Job({props,tags,setTags,setTagChosen,filterFunction}) {
   
   const {company,company_logo,keywords,location,position,posted_on,timing} = props;  
+
+  const [postedOn,setPostedOn] = useState();
 
   const updateTags =(eachTag)=> {
     setTagChosen(true);
@@ -18,9 +20,22 @@ function Job({props,tags,setTags,setTagChosen,filterFunction}) {
     
   }
 
-  useEffect(()=>{filterFunction()},[tags])
+  useEffect(()=>{
+    filterFunction();
+
+    if(!postedOn)
+    {
+        var datePosted = new Date(posted_on);
+        var dateNow = new Date();
+    
+        setPostedOn(dateNow.getDate() - datePosted.getDate());
+    }
+   
+
+
+  },[tags])
   return (
-    <div className='bg-white m-10 h-30 flex flex-col lg:flex-row justify-between p-5 items-center 
+    <div className='bg-white m-10 h-30 flex flex-col md:flex-row lg:flex-row justify-between p-5 items-center 
     hover:drop-shadow-md border-blue-500
      transition ease-in-out 0.2s rounded'>
 
@@ -37,7 +52,7 @@ function Job({props,tags,setTags,setTagChosen,filterFunction}) {
                 <h5 className='font-bold text-base lg:text-lg'>{position}</h5>
 
                 <ul className='flex text-xs justify-between items-center list-disc'>
-                    <li className='mr-6 list-none'>{posted_on}</li>
+                    <li className='mr-6 list-none'>{postedOn}d ago</li>
                     <li className='mr-6'>{timing}</li>
                     <li>{location}</li>
                     
