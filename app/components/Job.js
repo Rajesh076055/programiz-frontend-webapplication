@@ -51,7 +51,7 @@ function Job({props,tags,setTags,setTagChosen,filterFunction}) {
                 <p className='text-xs'>{company}</p>
                 <h5 className='font-bold text-base lg:text-lg'>{position}</h5>
 
-                <ul className='flex text-xs justify-between items-center list-disc'>
+                <ul className='flex text-[8px] lg:text-xs md:text-xs justify-between items-center list-disc'>
                     <li className='mr-6 list-none'>{postedOn}d ago</li>
                     <li className='mr-6'>{timing}</li>
                     <li>{location}</li>
